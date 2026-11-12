@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Previsor de jogos - Steam</title>
+    <script>
+        // Função para desativar o campo de preço se o jogo for Free-to-Play
+        function alternarPreco(checkbox) {
+            const inputPreco = document.getElementById('price_input');
+            if (checkbox.checked) {
+                inputPreco.value = "0";
+                inputPreco.disabled = true;
+            } else {
+                inputPreco.disabled = false;
+                inputPreco.value = "";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Previsor de sucesso de jogos na steam</h2>
+    <p>Coloque as informações do jogo para tentarmos estimar a popularidade do jogo:</p>
+
+    <!-- Botão para acessar a segunda página de gráficos -->
+    <p><a href="/graficos" style="padding: 8px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px;">Ver Gráficos e Análise Exploratória</a></p>
+    <hr>
+
+    <form action="/prever" method="POST">
+
+        <!-- Checkbox para Free-to-Play -->
+        <label>
+            <input type="checkbox" name="is_free" value="1" onchange="alternarPreco(this)"> Jogo Gratuito (Free-to-Play)
+        </label><br><br>
+
+        <label>Preço ($ USD):</label><br>
+        <input type="number" step="0.01" name="price" id="price_input" required placeholder="Ex: 19.99"><br><br>
+
+        <label>Idade minima recomendada:</label><br>
+        <input type="number" name="required_age" required value="0"><br><br>
+
+        <label>Gênero principal (Escolha da lista):</label><br>
+        <select name="genre_select" style="width: 200px; padding: 5px">
+            <option value="">-- Selecione --</option>
+            <option value="Indie">Indie</option>
+            <option value="Action">Action</option>
+            <option value="Casual">Casual</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Simulation">Simulation</option>
+            <option value="RPG">RPG</option>
+            <option value="Early Access">Early Access</option>
+            <option value="Free to Play">Free to Play</option>
+            <option value="Sports">Sports</option>
+        </select><br><br>
+
+        <label>Ou digite o gênero do jogo:</label><br>
+        <input type="text" name="genre_text" placeholder="Ex: Racing, Sports" style="width: 200px; padding: 5px;"><br><br>
+
+        <label>Plataforma:</label><br>
+       <select name="platforms" required style="width: 200px; padding: 5px">
+           <option value="windows">Windows</option>
+           <option value="mac">Mac</option>
+           <option value="linux">Linux</option>
+       </select><br><br>
+
+        <button type="submit">Calcular Previsão</button>
+    </form>
+
+    {% if exibir_resultado %}
+        <hr>
+        <h3>Relatório da Estimativa</h3>
+        <p><strong>Parâmetros informados:</strong></p>
+        <ul>
+            <li>Preço: {{ val_preco }}</li>
+            <li>Classificação Etária: {{ val_idade }}</li>
+            <li>Gênero: {{ val_genero }}</li>
+            <li>Plataforma principal: {{ val_plataforma }}</li>
+        </ul>
+       <h3 style="color: {{ cor_status }};">Resultado: {{ resultado_status }}</h3>
+    {% endif %}
+
+    {% if previsao_erro %}
+        <hr>
+        <h3 style="color: red;">{{ previsao_erro }}</h3>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Análise Exploratória - Steam</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px;">
+
+    <h2>Análise Exploratória de Dados (Gráficos)</h2>
+    <p>Visualização dos dados gerais extraídos do dataset da Steam:</p>
+
+    <!-- Botão para voltar à página inicial -->
+    <p><a href="/" style="padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Voltar para o Previsor</a></p>
+    <hr>
+
+    <div style="margin-bottom: 30px;">
+        <h3>1. Gêneros mais frequentes</h3>
+        <img src="{{ url_for('static', filename='grafico_generos.png') }}" alt="Gráfico Gêneros" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+    </div>
+
+    <div style="margin-bottom: 30px;">
+        <h3>2. Distribuição de preços</h3>
+        <img src="{{ url_for('static', filename='grafico_precos.png') }}" alt="Gráfico Preços" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+    </div>
+
+    <div style="margin-bottom: 30px;">
+        <h3>3. Preço mediano por proprietários</h3>
+        <img src="{{ url_for('static', filename='grafico_owners.png') }}" alt="Gráfico Preço x Owners" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+    </div>
+
+</body>
+</html>
