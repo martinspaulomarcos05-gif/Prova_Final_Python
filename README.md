@@ -9,7 +9,7 @@ Trabalho prático desenvolvido para a faculdade, aplicando engenharia de dados, 
 ##  Aluno
 * **Nome:** Marcos Paulo Martins de Andrade
 * **Nome:** João Pedro Rosul Wojcik
-* **Nome:** Abraão Lima 
+* **Nome:** Abraão Lima Gomes
 ---
 
 ##  Objetivo do Projeto

@@ -10,14 +10,9 @@ app = flask.Flask(__name__)
 # --- GERA OS GRÁFICOS AUTOMATICAMENTE AO INICIAR O APP ---
 os.makedirs('static', exist_ok=True)
 df_analise = carregar_dados_brutos()
+
 import matplotlib.pyplot as plt
-
-# Gera e salva as imagens sem exibir as janelas no servidor
 plt.ioff()
-from analise import graficos_generos, graficos_precos, graficos_preco_owners
-# Vamos usar o salvamento direto para garantir que a pasta static esteja pronta
-# (Se preferir, pode rodar o analise.py uma vez no console para gerar as imagens)
-
 
 modelo = joblib.load("modelo_steam.pkl")
 
