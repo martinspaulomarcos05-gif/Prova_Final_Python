@@ -4,6 +4,15 @@ import pandas as pd
 def carregar_dados():
     df = pd.read_csv("steam.csv")
 
+    duplicados = df.duplicated().sum()
+    print(f"Registros duplicados: {duplicados}")
+
+    preços_negativos = (pd.to_numeric(df['price'], errors='coerce') < 0).sum()
+    idades_negativas = (pd.to_numeric(df['required_age'], errors='coerce') < 0).sum()
+
+    print(f"Preços negativos: {preços_negativos}")
+    print(f"Idades negativas: {idades_negativas}")
+
     print(f"Total de linhas lidas do CSV: {len(df)}")
 
     if 'owners' in df.columns:

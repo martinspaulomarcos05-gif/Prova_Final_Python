@@ -38,6 +38,12 @@ def prever():
 
         idade = int(request.form['required_age'])
 
+        if preco < 0:
+            raise ValueError("O preço não pode ser negativo.")
+
+        if idade < 0:
+            raise ValueError("A idade não pode ser negativa.")
+
         # Captura o gênero (prioriza o texto digitado, se houver; senão usa o selecionado)
         genero_digitado = request.form.get('genre_text', '').strip()
         genero_selecionado = request.form.get('genre_select', '')
@@ -99,8 +105,15 @@ def prever():
             val_plataforma=request.form['platforms'].capitalize(),
         )
 
+    except ValueError:
+        return render_template('index.html', previsao_erro="Entrada inválida. Verifique se o preço e a idade foram preenchidos corretamente.")
+
+    except KeyError:
+        return render_template('index.html', previsao_erro="Preencha todos os campos obrigatórios antes de realizar a previsão.")
+
     except Exception as e:
-        return render_template('index.html', previsao_erro=f"Erro ao processar a previsão: {str(e)}")
+        return render_template('index.html', previsao_erro="Ocorreu um erro inesperado ao realizar a previsão.")
+
 if __name__ == "__main__":
     app.run(debug=True)
 
